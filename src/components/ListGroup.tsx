@@ -1,26 +1,36 @@
-import { MouseEvent } from "react";
+import React, { ReactNode, useState } from "react";
 
-function ListGroup() {
-  let items = ["New York", "Sydney", "London"];
-  const getMessage = () => {
-    // if true code after && is rendered and shown, otherwise nothing is rendered
-    return items.length === 0 && <p>No Item</p>;
-  };
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  // Hook
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   // Event handler
-  const handleClick = (event: MouseEvent) => console.log(event)
+  // const handleClick = (event: MouseEvent) => console.log(event);
 
   return (
     // Utilizing Fragment e.g import { Fragment } from "react";
     <>
-      <h1>List</h1>
-      {getMessage()}
+      <h1>{heading}</h1>
       <ul className="list-group">
         {items.map((item, index) => (
           <li
-            className="list-group-item"
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
             key={item}
-            onClick={handleClick}
+            onClick={() => {
+              setSelectedIndex(index)
+              onSelectItem(item);
+            }}
           >
             {item}
           </li>
