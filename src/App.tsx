@@ -1,5 +1,6 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert"
+import Message from "./components/Message";
 
 function App() {
   let items = ["New York", "Sydney", "London"];
@@ -13,6 +14,9 @@ function App() {
       <Alert>
         This is an Alert
       </Alert>
+      <Message>
+        Hi
+      </Message>
     </div>
   );
 }
